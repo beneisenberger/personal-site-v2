@@ -1,4 +1,29 @@
-<!-- NG-ZORRO -->
-<a href="https://github.com/NG-ZORRO/ng-zorro-antd" target="_blank" style="display: flex;align-items: center;justify-content: center;height: 100%;width: 100%;">
-  <img height="300" src="https://img.alicdn.com/tfs/TB1X.qJJgHqK1RjSZFgXXa7JXXa-89-131.svg">
-</a>
+<nz-layout>
+  <nz-header>
+    <h3>Ben Eisenberger</h3>
+    <h4>Omaha Folk + Experimental Guitar + Web and Software Development</h4>
+  </nz-header>
+  <nz-content>
+    <nz-tabset>
+      <nz-tab nzTitle="Blog">
+        <router-outlet></router-outlet>
+        <app-blog></app-blog>
+      </nz-tab>
+      <nz-tab nzTitle="About">
+        <app-about></app-about>
+      </nz-tab>
+      <nz-tab nzTitle="Media">
+        <app-media></app-media>
+      </nz-tab>
+      <nz-tab nzTitle="Code">
+        <app-code></app-code>
+      </nz-tab>
+      <nz-tab nzTitle="Shows">
+        <app-shows></app-shows>
+      </nz-tab>
+      <nz-tab nzTitle="Contact">
+        <app-contact></app-contact>
+      </nz-tab> 
+    </nz-tabset>
+  </nz-content>
+</nz-layout>

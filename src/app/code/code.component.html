@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="card-image" *ngFor="let individual of individual">
+      <div class="card-thing" [style.background-image]="'url('+individual.img+')'">
+        <div class="information">
+            <h3 class="center"><strong>{{individual.name}}</strong></h3>
+            <p>{{individual.desc}}</p>
+            <div class="center">
+                <a href="{{individual.link}}"><fa-icon [icon]="clone"></fa-icon>View in Broswer</a>
+                <a href="{{individual.github}}"><fa-icon [icon]="code"></fa-icon>View Code</a>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>  

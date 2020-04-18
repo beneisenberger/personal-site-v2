@@ -1,0 +1,79 @@
+<ng-container *ngIf="post" class="post-container">
+    <div [hidden]="!editing">
+        <nz-card>
+            <h2>Update Post</h2>
+
+                <input matInput placeholder="Post Title" [(ngModel)]="post.title">
+                <textarea matInput placeholder="Post Content" rows="10" [(ngModel)]="post.content"></textarea>
+            <button mat-raised-button color="accent" (click)="updatePost()">Save</button>
+            <button mat-button (click)="editing=false">Cancel</button>
+        </nz-card>
+    </div>
+    <div [hidden]="editing">
+
+        <nz-card>
+            <div class="post-image">
+                <img src="{{post.image}}" alt="{{post.title}}" width="400px">
+            </div>
+            <div class="post-content">
+                <p class="commentText"><img class="commentImage" [src]="post.authorImage">posted by {{post.author}} &bull; {{ post.published | date }}</p>
+                <h2>{{post.title}}</h2>
+                <p>{{post.content}}</p>
+            </div>
+            <div align="end" *ngIf="auth.user.uid === post.authorId">
+                <button mat-icon-button (click)="editing=true">
+                    <i nz-icon nzType="edit" nzTheme="outline"></i>
+                </button>
+                <button mat-icon-button (click)="deletePost()">
+                    <i nz-icon nzType="delete" nzTheme="outline"></i>
+                </button>
+            </div>
+
+            <nz-card *ngFor="let comment of comments">
+                <div *ngIf="comment">
+                    <div class="authorDiv row">
+                        <img class="commentImage" [src]="comment.authorImage">
+                        <p class="commentText col-9">posted by {{comment.author}} on {{comment.published | date}}</p>
+                        <button *ngIf="auth.user.uid === comment.authorId" mat-icon-button color="primary"
+                            class="col-1" (click)="deleteComment()">
+                            <i nz-icon nzType="delete" nzTheme="outline"></i>
+                        </button>
+                    </div>
+                    <p class="commentListText col-12">{{comment.content}}</p>
+                </div>
+            </nz-card>
+                <div *ngIf="auth.user.uid" class="row">
+                    <h3 class="col-12">Write a comment:</h3>
+                    <div mat-card-avatar><img class="commentImage footerImage" src="{{auth.user.photoURL}}"></div>
+                    <quill-editor
+                        [(ngModel)]="content"
+                        class="quill-editor">
+                        <div quill-editor-toolbar>
+                        <span class="ql-formats">
+                            <button class="ql-bold" [title]="'Bold'"></button>
+                            <button class="ql-italic" [title]="'Italic'"></button>
+                            <button class="ql-underline" [title]="'Underline'"></button>
+                            <button class="ql-strike" [title]="'Strike'"></button>
+                        </span>
+                        <span class="ql-formats">
+                            <select class="ql-align" [title]="'Aligment'">
+                            <option selected></option>
+                            <option value="center"></option>
+                            <option value="right"></option>
+                            <option value="justify"></option>
+                            </select>
+                        </span>
+                        <span class="ql-formats">
+                            <button class="ql-link" [title]="'Link'"></button>
+                            <button class="ql-image" [title]="'Image'"></button>
+                        </span>
+                        </div>
+                    </quill-editor>
+
+                    <button class="done col-1" mat-icon-button color="primary" (click)="createComment(content)">
+                        <i nz-icon nzType="check" nzTheme="outline"></i>
+                    </button>
+                </div>
+        </nz-card>
+    </div>
+</ng-container>

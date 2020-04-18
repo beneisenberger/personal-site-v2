@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import * as firebase from 'firebase';
+import { FIREBASE_CONFIG } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'personal-site-v2';
+
+  constructor() {
+    firebase.initializeApp(FIREBASE_CONFIG);
+  }
 }

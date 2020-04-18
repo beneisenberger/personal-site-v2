@@ -1,0 +1,49 @@
+.icon {
+    margin: 10px 5px;
+    font-size: 30px;
+}
+
+.music-embed {
+    height: 450;
+    width: 100%;
+}
+
+section {
+    padding: 20px;
+    height: 450px;
+    background-color: rgba(255,255,255,0.8); /*dim the background*/
+}
+
+img {
+    width: 100%;
+    opacity: 0.3;
+    overflow-y: hidden;
+    position: relative;
+}
+
+.music {
+    max-width: 40%;
+    float: left;
+}
+
+.music-icon {
+    width: 40px;
+    margin: 0 10px;
+}
+
+.artist {
+    max-width: 60%;
+    float: right;
+    margin: 30px;
+}
+
+.muisc .artist {
+    position: absolute;
+    top: 20px;
+}
+
+@media (max-width: 500px) {
+    section {
+        background-size: auto 100%;
+    }
+}

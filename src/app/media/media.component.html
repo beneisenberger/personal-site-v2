@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="music-embed" *ngFor="let music of music">
+        <section>
+            <div class="music">
+                <iframe *ngIf="displayBandcamp" class="bandcamp-embed" style="border: 0; width: 250px; height: 392px;"
+                    [src]="sanitizer.bypassSecurityTrustResourceUrl(music.embed.album)"
+                    seamless><a href="{{music.embed.link}}">{{music.embed.title}}</a>
+                </iframe>
+            </div>
+            <div class="artist">
+                <h3><b>{{music.artist}}</b></h3>
+                <p>{{music.description}}</p>
+                <h3><b>Releases:</b></h3>
+                <p *ngFor="let release of music.releases">{{release}}</p>
+                <a class="icon" href="{{music.social.spotify}}"><img class="music-icon" src="assets/spotify.png"></a>
+                <a class="icon" href="{{music.social.apple}}"><img class="music-icon" src="assets/applemusic.jpg"></a>
+                <a class="icon" href="{{music.social.bandcamp}}"><img class="music-icon" src="assets/bandcamp.png"></a>
+                <a class="icon" href="{{music.social.discogs}}"><img class="music-icon" src="assets/discogs.jpg"></a> 
+            </div>
+        </section>
+    </div>
+</div>
