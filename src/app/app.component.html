@@ -4,9 +4,8 @@
     <h4>Omaha Folk + Experimental Guitar + Web and Software Development</h4>
   </nz-header>
   <nz-content>
-    <nz-tabset>
-      <nz-tab nzTitle="Blog">
-        <router-outlet></router-outlet>
+    <nz-tabset [nzSelectedIndex]="currentTab">
+      <nz-tab nzTitle="Blog" [nzDisabled]='true'>
         <app-blog></app-blog>
       </nz-tab>
       <nz-tab nzTitle="About">

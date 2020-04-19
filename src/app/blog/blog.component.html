@@ -8,7 +8,7 @@
     <button *ngIf="auth.user" nz-button (click)="logout()">Log Out</button>
 </div>
 <router-outlet></router-outlet>
-<div class="container" *ngIf="posts">
+<div class="container" *ngIf="posts && !post">
     <div class="blog-card" *ngFor="let post of posts">
         <div class="meta">
             <div class="photo" [style.backgroundImage]="'url('+ post.image +')'"></div>

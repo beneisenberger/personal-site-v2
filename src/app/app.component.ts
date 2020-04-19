@@ -9,8 +9,10 @@ import { FIREBASE_CONFIG } from 'src/environments/environment';
 })
 export class AppComponent {
   title = 'personal-site-v2';
+  currentTab: number;
 
   constructor() {
+    this.currentTab = 1;
     firebase.initializeApp(FIREBASE_CONFIG);
   }
 }

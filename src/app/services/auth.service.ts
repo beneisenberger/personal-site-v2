@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +10,25 @@ export class AuthService {
   auth = firebase.auth();
   user: firebase.User
   isNewUser: boolean;
+  postSubject: BehaviorSubject<string>;
 
-  constructor() {
+  constructor(private route: ActivatedRoute) {
     this.subscribeUser();
+    this.getPost();
   }
 
   get authenticated(): boolean {
     return this.user !== null;
+  }
+
+ getPost() {
+  return new Observable(observer => {
+      this.route.paramMap.subscribe(async res => {
+        const postId = res;
+        console.log(res);
+        observer.next(postId);
+      });
+    })
   }
 
   subscribeUser() {

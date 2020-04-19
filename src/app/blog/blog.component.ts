@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Post } from '../models/post';
 import { Subscription } from 'rxjs';
 import { PostService } from '../services/post.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { AuthService } from '../services/auth.service';
 
@@ -13,6 +13,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class BlogComponent implements OnInit {
   posts: Post[];
+  post: string;
   selectedPost: Post;
   postsSubscription: Subscription;
 
@@ -24,6 +25,7 @@ export class BlogComponent implements OnInit {
   constructor(
     private postService: PostService,
     private router: Router,
+    private route: ActivatedRoute,
     private message: NzMessageService,
     public auth: AuthService
   ) {}
@@ -31,6 +33,13 @@ export class BlogComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.getPosts();
+    this.getPost();
+  }
+
+  getPost() {
+    this.auth.getPost().subscribe(res => {
+      this.post = res as string;
+    })
   }
 
   getPosts() {
