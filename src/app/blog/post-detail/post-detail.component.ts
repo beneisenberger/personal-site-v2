@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Post, Comment } from 'src/app/models/post';
+import { Post, Comment } from 'src/app/models/Post';
 import { PostService } from 'src/app/services/post.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { NzMessageService } from 'ng-zorro-antd';
+import { faNetworkWired } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-post-detail',
@@ -64,14 +65,18 @@ export class PostDetailComponent implements OnInit {
 
   createComment(content: string) {
     const data = {
-      author: this.auth.user.displayName || this.auth.user.email,
+      author: this.auth.user.uid ? this.auth.user.uid : null ,
       authorId: this.auth.user.uid,
       authorImage: this.auth.user.photoURL,
       content: content,
       published: new Date(),
-      postId: this.postId
+      postId: this.postId,
+      id: new Date().getTime().toString()
     }
-    this.postService.saveComment(data);
+    this.postService.saveComment(data).catch(error => {
+      this.message.error(error);
+    })
+    this.message.create("success", "Comment posted successfully");
   }
 
 
@@ -87,7 +92,11 @@ export class PostDetailComponent implements OnInit {
 
   deletePost() {
     this.postService.deletePost(this.postId);
-    this.router.navigate(["/"]);
+    this.router.navigate(["/posts"]);
+  }
+
+  navigateBack() {
+    this.router.navigate(["/posts"]);
   }
 
   deleteComment(id: string) {

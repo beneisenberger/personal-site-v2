@@ -15,10 +15,10 @@ import { MediaComponent } from './media/media.component';
 import { CodeComponent } from './code/code.component';
 import { ContactComponent } from './contact/contact.component';
 import { ShowsComponent } from './shows/shows.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PostDetailComponent } from './blog/post-detail/post-detail.component';
 import { NewPostComponent } from './blog/new-post/new-post.component';
-import { QuillModule } from 'ngx-quill';
+// import { QuillModule } from 'ngx-quill';
+import { NewAlbumComponent } from './media/new-album/new-album.component';
 
 registerLocaleData(en);
 
@@ -32,7 +32,8 @@ registerLocaleData(en);
     ContactComponent,
     ShowsComponent,
     PostDetailComponent,
-    NewPostComponent
+    NewPostComponent,
+    NewAlbumComponent
   ],
   imports: [
     BrowserModule,
@@ -42,8 +43,7 @@ registerLocaleData(en);
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    FontAwesomeModule,
-    QuillModule.forRoot() 
+    // QuillModule.forRoot() 
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

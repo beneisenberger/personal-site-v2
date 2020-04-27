@@ -1,7 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
-import { faRecordVinyl, faMusic } from '@fortawesome/free-solid-svg-icons';
 
 export interface Media {
   backgroundImage: string;
@@ -19,9 +18,6 @@ export interface Media {
 })
 export class MediaComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
-
-  discogs = faRecordVinyl;
-  itunes = faMusic;
 
   public innerWidth: any;
   displayBandcamp: boolean = true;

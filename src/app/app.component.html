@@ -4,25 +4,26 @@
     <h4>Omaha Folk + Experimental Guitar + Web and Software Development</h4>
   </nz-header>
   <nz-content>
-    <nz-tabset [nzSelectedIndex]="currentTab">
-      <nz-tab nzTitle="Blog" [nzDisabled]='true'>
-        <app-blog></app-blog>
+    <nz-tabset nzLinkRouter>
+      <nz-tab [nzDisabled]="true">
+        <a nz-tab-link routerLink="posts">Blog</a>
       </nz-tab>
-      <nz-tab nzTitle="About">
-        <app-about></app-about>
+      <nz-tab>
+        <a nz-tab-link routerLink="about">About</a>
       </nz-tab>
-      <nz-tab nzTitle="Media">
-        <app-media></app-media>
+      <nz-tab>
+        <a nz-tab-link routerLink="media">Media</a>
       </nz-tab>
-      <nz-tab nzTitle="Code">
-        <app-code></app-code>
+      <nz-tab>
+        <a nz-tab-link routerLink="code">Code</a>
       </nz-tab>
-      <nz-tab nzTitle="Shows">
-        <app-shows></app-shows>
+      <nz-tab>
+        <a nz-tab-link routerLink="shows">Shows</a>
       </nz-tab>
-      <nz-tab nzTitle="Contact">
-        <app-contact></app-contact>
-      </nz-tab> 
+      <nz-tab>
+        <a nz-tab-link routerLink="contact">Contact</a>
+      </nz-tab>
     </nz-tabset>
+    <router-outlet></router-outlet>
   </nz-content>
 </nz-layout>

@@ -11,6 +11,7 @@
     <div [hidden]="editing">
         <nz-card>
             <div class="post-image">
+                <i class="back-button" (click)="navigateBack()" nz-icon nzType="arrow-left" nzTheme="outline"></i>
                 <img src="{{post.image}}" alt="{{post.title}}" width="400px">
             </div>
             <div class="post-content">
@@ -18,10 +19,8 @@
                 <h2>{{post.title}}</h2>
                 <p>{{post.content}}</p>
             </div>
-            <div align="end" *ngIf="auth.user.uid === post.authorId">
-                <button mat-icon-button (click)="editing=true" class="edit-buttons">
-                    <i nz-icon nzType="edit" nzTheme="outline"></i>
-                </button>
+            <div align="end" *ngIf="auth.user && auth.user.uid === post.authorId">
+
                 <button mat-icon-button (click)="deletePost()" class="edit-buttons">
                     <i nz-icon nzType="delete" nzTheme="outline"></i>
                 </button>
@@ -30,10 +29,9 @@
             <nz-card *ngFor="let comment of comments" class="comment-bottom">
                 <div *ngIf="comment">
                     <div class="authorDiv row">
-                        <img class="commentImage" [src]="comment.authorImage">
-                        <p class="commentText col-9">posted by {{comment.author}} on {{comment.published | date}}</p>
-                        <button *ngIf="auth.user.uid === comment.authorId" mat-icon-button color="primary"
-                            class="col-1" (click)="deleteComment()">
+                        <p class="commentText"><img class="commentImage" [src]="comment.authorImage">posted by {{comment.author}} &bull; {{ comment.published | date }}</p>
+                        <button *ngIf="auth.user && auth.user.uid === comment.authorId" mat-icon-button color="primary"
+                            class="col-1" (click)="deleteComment(comment.id)">
                             <i nz-icon nzType="delete" nzTheme="outline"></i>
                         </button>
                     </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, Form, FormBuilder, FormGroup, ValidationErrors } from '@angular/forms';
 import { Observable, Observer } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-contact',
@@ -10,7 +11,7 @@ import { Observable, Observer } from 'rxjs';
 export class ContactComponent implements OnInit {
   validateForm: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private auth: AuthService) { }
 
   ngOnInit() {
     this.validateForm = this.fb.group({
@@ -20,16 +21,16 @@ export class ContactComponent implements OnInit {
     });
   }
 
-  submitForm(value: { userName: string; email: string; password: string; confirm: string; comment: string }): void {
+  submitForm(form): void {
     for (const key in this.validateForm.controls) {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
-    console.log(value);
+    this.auth.contactForm(form);
+    this.resetForm();
   }
 
-  resetForm(e: MouseEvent): void {
-    e.preventDefault();
+  resetForm(): void {
     this.validateForm.reset();
     for (const key in this.validateForm.controls) {
       this.validateForm.controls[key].markAsPristine();

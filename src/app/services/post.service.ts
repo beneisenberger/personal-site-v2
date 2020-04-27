@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import * as firebase from 'firebase';
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
-import { Post, Comment } from '../models/post';
+import { Post, Comment } from '../models/Post';
 
 @Injectable({
   providedIn: 'root'
@@ -140,7 +140,7 @@ export class PostService {
       nzOnOk: () => {
         try {
           this.db
-            .collection('commets')
+            .collection('comments')
             .doc(commentId)
             .delete();
           this.message.create('success', 'Comment Deleted!');

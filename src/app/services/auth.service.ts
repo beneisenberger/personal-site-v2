@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,9 @@ export class AuthService {
   user: firebase.User
   isNewUser: boolean;
   postSubject: BehaviorSubject<string>;
+  db = firebase.firestore();
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private message: NzMessageService) {
     this.subscribeUser();
     this.getPost();
   }
@@ -69,6 +71,14 @@ export class AuthService {
       return this.user.uid;
     }
     return null;
+  }
+
+  contactForm(form) {
+    this.db.collection('contact')
+      .doc(new Date().getTime().toString())
+      .set({form}).then(() => {
+        this.message.create("success", "Your message has been sent successfully");
+    })
   }
 
   async googleLogin() {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Post } from '../models/post';
+import { Post } from '../models/Post';
 import { Subscription } from 'rxjs';
 import { PostService } from '../services/post.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -48,6 +48,7 @@ export class BlogComponent implements OnInit {
     }
     this.postsSubscription = this.postService.getPosts().subscribe({
       next: (values) => {
+        console.log(values);
         this.posts = values;
         this.loading = false;
       },
@@ -90,7 +91,7 @@ export class BlogComponent implements OnInit {
 
   navigateToPost(postId: string) {
     console.log(postId);
-    this.router.navigate([`/${postId}`]);
+    this.router.navigate([`/posts/${postId}`]);
   }
 
   login() {
